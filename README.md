@@ -7,7 +7,7 @@ Zunächst sind nur ggplot-Hintergründe im viadee-CI enthalten.
 # Installation
 Eine Installation von GitHub ist, wie folgt möglich:
 
-		devtools::install_github("fkoehne/viadeeDataViz")
+		devtools::install_github("viadee/viadeeDataViz")
 
 
 Alternativ kann sie hier als bspw. ![viadeedataviz_0.1.0.tar.gz](viadeedataviz_0.1.0.tar.gz)  heruntergeladen und per RStudio aus der Datei installiert werden.
