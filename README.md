@@ -5,8 +5,9 @@ Idee: Wir generalisieren typische Visualisierungen, aus den Data-Mining-POCs und
 Zunächst sind nur ggplot-Hintergründe im viadee-CI enthalten.
 
 # Installation
-Das Package kann entweder sehr einfach selbst kompiliert oder hier als bspw. ![viadeedataviz_0.1.0.tar.gz](viadeedataviz_0.1.0.tar.gz)  heruntergeladen und per RStudio aus der Datei installiert werden.
+Eine Installation von GitHub ist, wie folgt möglich:
 
-# Build
-roxygen2::roxygenise()
-RStudio > Build > Build Source Package
+		devtools::install_github("fkoehne/viadeeDataViz")
+
+
+Alternativ kann sie hier als bspw. ![viadeedataviz_0.1.0.tar.gz](viadeedataviz_0.1.0.tar.gz)  heruntergeladen und per RStudio aus der Datei installiert werden.
