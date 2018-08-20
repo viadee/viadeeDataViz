@@ -130,7 +130,7 @@ load_model <- function(path, data){
 #' can also be saved (optional)
 #' @param custom_names custom variables can be added to the file. This variable
 #'   should contain the names of the columns as a list of strings (optional)
-#' @param custom_values the values corresponding to the column names in custom_names (optional)
+#' @param custom_values the values corresponding to the column names in custom_names. Lists as values are not supported! (optional)
 #' @param custom_threshold the threshold that shall be used to determine the values of the different measures  (optional)
 #' @export
 #' @examples
@@ -145,6 +145,7 @@ save_score <-
            custom_threshold = NULL) {
     #browser()
 
+    # zuerst wird versucht die bisherigen Werte einzulesen
     model_highscore_old <- tryCatch(
       {
         read.csv(paste(path,"model_highscore.csv", sep = "")) %>%
@@ -153,13 +154,16 @@ save_score <-
       },
       warning=function(cond) {
         message("Path is incorrect or there is no highscore yet saved")
-        NA #wird auf NA gesetzt
+        # sollten keine Daten vorhanden sein wird die Variable auf NA gesetzt, damit
+        # dies später erkannt werden kann
+        NA
       }
     )
 
+    # wird gebraucht um bestimmte metrics zu bekommen
     perf <- h2o.performance(model, valid=TRUE)
 
-
+    # alle spalten die unabhängig von der Kategorie gespeichert werden sollen
     date <- Sys.time()
     name <- model@model_id
     category <- perf@metrics$model_category
@@ -203,9 +207,12 @@ save_score <-
     }else if(perf@metrics$model_category=="Binomial"){
       #klassifikationsspezifische eigenschaften
       if(missing(custom_threshold)){
+        # falls keine spezieller threshold angegeben wurde, kann nur die confusion matrix
+        # gesetzt werden
         confusion_matrix <- h2o.confusionMatrix(model)
-        #statt null hätte ich hier lieber das default threshold das h2o benutzt, aber
-        #ich weiß nicht nach welcher measure das bestimmt wird
+        #statt null hätte ich hier lieber das default threshold das h2o benutzt
+        #(um z.B. die confusion matrix anzuzeigen), aber ich weiß nicht nach
+        #welcher measure das bestimmt wird
         sensitivity <- NULL
         specificity <- NULL
         accuracy <-NULL
@@ -280,8 +287,13 @@ save_score <-
 
     #custom features werden hinzugefügt
     for(i in 1:length(custom_names)){
+      #ein einspaltiges dataframe wird pro feature erstellt
+      # Listen würden hier ein Problem darstellen, da dann dieses Dataframe mehr als eine Zeile hätte
       feature <- data.frame("variable"=custom_values[i])
+      #und dann dem dataframe hinzugefügt
       model_highscore_new <- cbind(model_highscore_new, feature)
+      #das ganze muss so umständlich erstellt werden, da man erst jetzt den Spaltennamen auf
+      #einen Variablenwert setzen kann
       names(model_highscore_new)[names(model_highscore_new)=="variable"] <- custom_names[i]
     }
 
