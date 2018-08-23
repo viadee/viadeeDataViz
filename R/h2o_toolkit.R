@@ -213,11 +213,11 @@ save_score <-
         #statt null hätte ich hier lieber das default threshold das h2o benutzt
         #(um z.B. die confusion matrix anzuzeigen), aber ich weiß nicht nach
         #welcher measure das bestimmt wird
-        sensitivity <- NULL
-        specificity <- NULL
-        accuracy <-NULL
-        precision <- NULL
-        fmeasure <- NULL
+        sensitivity <- NA
+        specificity <- NA
+        accuracy <- NA
+        precision <- NA
+        fmeasure <- NA
       }else{
         confusion_matrix <- h2o.confusionMatrix(model, thresholds = 1-custom_threshold)
         sensitivity <- h2o.sensitivity(perf, thresholds = 1-custom_threshold)[[1]]
