@@ -284,18 +284,20 @@ save_score <-
     model_highscore_new$important_features <- as.character(list(model@model$variable_importances$variable))
     model_highscore_new$features <- as.character(list(names(data)))
 
-
-    #custom features werden hinzugefügt
-    for(i in 1:length(custom_names)){
-      #ein einspaltiges dataframe wird pro feature erstellt
-      # Listen würden hier ein Problem darstellen, da dann dieses Dataframe mehr als eine Zeile hätte
-      feature <- data.frame("variable"=custom_values[i])
-      #und dann dem dataframe hinzugefügt
-      model_highscore_new <- cbind(model_highscore_new, feature)
-      #das ganze muss so umständlich erstellt werden, da man erst jetzt den Spaltennamen auf
-      #einen Variablenwert setzen kann
-      names(model_highscore_new)[names(model_highscore_new)=="variable"] <- custom_names[i]
+    if(!missing(custom_names)){
+      #custom features werden hinzugefügt
+      for(i in 1:length(custom_names)){
+        #ein einspaltiges dataframe wird pro feature erstellt
+        # Listen würden hier ein Problem darstellen, da dann dieses Dataframe mehr als eine Zeile hätte
+        feature <- data.frame("variable"=custom_values[i])
+        #und dann dem dataframe hinzugefügt
+        model_highscore_new <- cbind(model_highscore_new, feature)
+        #das ganze muss so umständlich erstellt werden, da man erst jetzt den Spaltennamen auf
+        #einen Variablenwert setzen kann
+        names(model_highscore_new)[names(model_highscore_new)=="variable"] <- custom_names[i]
+      }
     }
+
 
 
     #Schreiben des neuen scores in eine neue Datei oder in die alte Datei
@@ -306,5 +308,4 @@ save_score <-
       write.csv(model_highscore, file = paste(path,"model_highscore.csv", sep = ""))
     }
   }
-
 
