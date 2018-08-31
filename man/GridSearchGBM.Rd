@@ -4,7 +4,7 @@
 \alias{GridSearchGBM}
 \title{A function that realizes and visualizes a GridSearch for Gradient Boosting Machines with H2O.}
 \usage{
-GridSearchGBM(train, test, predictorColumns, y, runtime)
+GridSearchGBM(train, test, predictorColumns, y, runtime, type)
 }
 \arguments{
 \item{train}{The training frame as h2O Frame}
@@ -16,11 +16,13 @@ GridSearchGBM(train, test, predictorColumns, y, runtime)
 \item{y}{The goal variable}
 
 \item{runtime}{Max time for model training}
+
+\item{type}{Distinction between "Classification" and "Regression"}
 }
 \description{
 This function allows you to further analyze GridSearches for GBM.
-Therefore it initializes a default modell and compares it to the parameter values in a GridSearch
+Therefore, it initializes a default modell and compares it to the parameter values in a GridSearch.
 }
 \examples{
-GridSearchGBM(train, test, predictorColumns=c("column1", "column2", "column3"), y="columnY", 360)
+GridSearchGBM(train, test, predictorColumns=c("column1", "column2", "column3"), y="columnY", 360, "Classification")
 }

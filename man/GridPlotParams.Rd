@@ -4,19 +4,21 @@
 \alias{GridPlotParams}
 \title{Visualizes the GridSearch and saves an overview-plot as "/GridSearch.png"}
 \usage{
-GridPlotParams(GridResultFinal, Vergleichswert)
+GridPlotParams(GridResultFinal, Vergleichswert, metric)
 }
 \arguments{
 \item{GridResultFinal}{Descending sorted result frame}
 
 \item{Vergleichswert}{The value which is used for comparison, e.g. default model}
+
+\item{metric}{Used metric can be choosen between auc (Classification) and rmse (Regression)}
 }
 \description{
-The AUC is ploted depending on the chosen parameter values in the GridSearch.
+The rmse is ploted depending on the chosen parameter values in the GridSearch.
 The best points are highlighted in blue; the ten best points of each parameter in green
 The red line shows the comparison value of the default model.
 }
 \examples{
-GridPlotParams(GridResultFinal= as.data.frame(sortedGrid@summary_table), Vergleichswert= 0.8)
+GridPlotParams(GridResultFinal= as.data.frame(sortedGrid@summary_table), Vergleichswert= 0.8), "auc")
 
 }
