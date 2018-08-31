@@ -20,7 +20,7 @@ can also be saved (optional)}
 \item{custom_names}{custom variables can be added to the file. This variable
 should contain the names of the columns as a list of strings (optional)}
 
-\item{custom_values}{the values corresponding to the column names in custom_names (optional)}
+\item{custom_values}{the values corresponding to the column names in custom_names. Lists as values are not supported! (optional)}
 
 \item{custom_threshold}{the threshold that shall be used to determine the values of the different measures  (optional)}
 }
