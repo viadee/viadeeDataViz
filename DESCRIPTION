@@ -1,12 +1,12 @@
 Package: viadeedataviz
 Type: Package
 Title: viadee DataViz 
-Version: 0.1.0
+Version: 0.1.1
 Author: Frank Köhne
 Maintainer: Frank Köhne <kof@viadee.de>
 Description: Common data visualisiation functions, esp. backgrounds for ggplot2. Documented via roxygen2.
 License: BSD
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.0
-Imports: ggplot2, ggthemes, grid
+RoxygenNote: 6.1.1
+Imports: ggplot2, ggthemes, grid, lubridate, h2o
